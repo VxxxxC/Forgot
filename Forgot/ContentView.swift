@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         
         TabView {
-            ForgotTab().tabItem{
+            ForgotList().tabItem{
                 Image(systemName: "list.bullet")
                 Text("Forgot List")
             }
@@ -28,5 +28,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: ForgotItems.self, inMemory: true)
 }

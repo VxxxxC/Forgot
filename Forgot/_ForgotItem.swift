@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Item {
+final class _ForgotItems {
     var timestamp: Date
     var text: String = ""
     

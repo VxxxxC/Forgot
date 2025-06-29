@@ -1,0 +1,125 @@
+//
+//  ForgotWidget.swift
+//  ForgotWidget
+//
+//  Created by VC on 29/6/2025.
+//
+
+import WidgetKit
+import SwiftUI
+import SwiftData
+
+struct Provider: AppIntentTimelineProvider {
+    func placeholder(in context: Context) -> ForgotEntry {
+        ForgotEntry()
+    }
+
+    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> ForgotEntry {
+        ForgotEntry()
+    }
+    
+    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<ForgotEntry> {
+        var entries: [ForgotEntry] = []
+        let entry = ForgotEntry()
+        entries.append(entry)
+
+        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+//        let currentDate = Date()
+//        for hourOffset in 0 ..< 5 {
+//            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+//            let entry = ForgotEntry(date: entryDate, configuration: configuration)
+//            entries.append(entry)
+//        }
+
+        return Timeline(entries: entries, policy: .atEnd)
+    }
+
+//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
+//        // Generate a list containing the contexts this widget is relevant in.
+//    }
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            ForgotItems.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, allowsSave: true)
+
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
+}
+
+struct ForgotEntry: TimelineEntry {
+    let date: Date = .now
+}
+
+struct ForgotWidgetEntryView : View {
+    var entry: Provider.Entry
+
+    @Query(itemDescriptor, animation: .snappy) private var forgotList: [ForgotItems]
+    var body: some View {
+        VStack {
+            HStack{
+                Text("\(Date().formatted(.dateTime.day().month().weekday()))")
+            }
+            
+                ForEach(forgotList) {
+                    item in
+                    HStack{
+                        Text("\(item.task)")
+                    }
+                }
+            
+        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+    
+    static var itemDescriptor: FetchDescriptor<ForgotItems> {
+        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .reverse)]
+        var descriptor = FetchDescriptor(sortBy: sort)
+        descriptor.fetchLimit = 3
+        return descriptor
+    }
+}
+
+struct ForgotWidget: Widget {
+    let kind: String = "ForgotWidget"
+
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(kind: kind, provider: Provider()) { entry in
+            ForgotWidgetEntryView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+                .modelContainer(sharedModelContainer)
+        }
+    }
+}
+
+var sharedModelContainer: ModelContainer = {
+    let schema = Schema([
+        ForgotItems.self,
+    ])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, allowsSave: true)
+
+    do {
+        return try ModelContainer(for: schema, configurations: [modelConfiguration])
+    } catch {
+        fatalError("Could not create ModelContainer: \(error)")
+    }
+}()
+
+extension ConfigurationAppIntent {
+    fileprivate static var smiley: ConfigurationAppIntent {
+        let intent = ConfigurationAppIntent()
+        intent.forgotItem = "😀"
+        return intent
+    }
+}
+
+
+#Preview(as: .systemSmall) {
+    ForgotWidget()
+} timeline: {
+    ForgotEntry()
+}
+

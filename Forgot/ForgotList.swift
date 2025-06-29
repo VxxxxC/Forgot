@@ -7,11 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
-struct ForgotTab: View {
+struct ForgotList: View {
     
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query(sort: [SortDescriptor(\ForgotItems.timestamp, order: .reverse)], animation: .snappy) private var items: [ForgotItems]
     @State private var showingPopup: Bool = false
     @State private var inputText: String = ""
     
@@ -19,15 +20,18 @@ struct ForgotTab: View {
         NavigationSplitView {
             ZStack{
                 List {
-                    ForEach(items) { item in
-                        NavigationLink {
-                            Text(item.text)
-                            Text("\(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .shortened))")
-                        } label: {
-                            Text(item.text)
+                    Section(activeSectionTitle){
+                        ForEach(items) { item in
+                            NavigationLink {
+                                Text(item.task)
+                                Text("\(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .shortened))")
+                            } label: {
+                                Text(item.task)
+                            }
                         }
+                        .onDelete(perform: deleteItems)
                     }
-                    .onDelete(perform: deleteItems)
+                    
                 }
                 .toolbar {
     //                ToolbarItem(placement: .navigationBarTrailing) {
@@ -49,6 +53,10 @@ struct ForgotTab: View {
         }
     }
     
+    var activeSectionTitle: String {
+        let count = items.count
+        return count == 0 ? "No Items" : "\(count) Item\(count == 1 ? "" : "s")"
+    }
     
     private func submit() {
         guard !inputText.isEmpty else { return }
@@ -59,8 +67,9 @@ struct ForgotTab: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date(), text: inputText)
+            let newItem = ForgotItems(timestamp: Date(), task: inputText)
             modelContext.insert(newItem)
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -68,6 +77,7 @@ struct ForgotTab: View {
         withAnimation {
             for index in offsets {
                 modelContext.delete(items[index])
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
     }

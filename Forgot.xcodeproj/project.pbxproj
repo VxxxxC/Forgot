@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		55FF6DB42E105BD400B126D8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF6DB32E105BD400B126D8 /* WidgetKit.framework */; };
+		55FF6DB62E105BD400B126D8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF6DB52E105BD400B126D8 /* SwiftUI.framework */; };
+		55FF6DC72E105BD500B126D8 /* ForgotWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 55FF6DB12E105BD400B126D8 /* ForgotWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		55FF6D8B2E1038F500B126D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,17 +27,62 @@
 			remoteGlobalIDString = 55FF6D7A2E1038F400B126D8;
 			remoteInfo = Forgot;
 		};
+		55FF6DC52E105BD500B126D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 55FF6D732E1038F400B126D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55FF6DB02E105BD400B126D8;
+			remoteInfo = ForgotWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		55FF6DCC2E105BD500B126D8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				55FF6DC72E105BD500B126D8 /* ForgotWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		5594B5012E11BCC9001C9B40 /* ForgotWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ForgotWidgetExtension.entitlements; sourceTree = "<group>"; };
 		55FF6D7B2E1038F400B126D8 /* Forgot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forgot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FF6D8A2E1038F500B126D8 /* ForgotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForgotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FF6D942E1038F500B126D8 /* ForgotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForgotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		55FF6DB12E105BD400B126D8 /* ForgotWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ForgotWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		55FF6DB32E105BD400B126D8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		55FF6DB52E105BD400B126D8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		55FF6DC82E105BD500B126D8 /* Exceptions for "ForgotWidget" folder in "ForgotWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 55FF6DB02E105BD400B126D8 /* ForgotWidgetExtension */;
+		};
+		55FF6DD22E106A8800B126D8 /* Exceptions for "Forgot" folder in "ForgotWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ForgotModel.swift,
+			);
+			target = 55FF6DB02E105BD400B126D8 /* ForgotWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		55FF6D7D2E1038F400B126D8 /* Forgot */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				55FF6DD22E106A8800B126D8 /* Exceptions for "Forgot" folder in "ForgotWidgetExtension" target */,
+			);
 			path = Forgot;
 			sourceTree = "<group>";
 		};
@@ -43,6 +94,14 @@
 		55FF6D972E1038F500B126D8 /* ForgotUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ForgotUITests;
+			sourceTree = "<group>";
+		};
+		55FF6DB72E105BD400B126D8 /* ForgotWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				55FF6DC82E105BD500B126D8 /* Exceptions for "ForgotWidget" folder in "ForgotWidgetExtension" target */,
+			);
+			path = ForgotWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,15 +128,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		55FF6DAE2E105BD400B126D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55FF6DB62E105BD400B126D8 /* SwiftUI.framework in Frameworks */,
+				55FF6DB42E105BD400B126D8 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		55FF6D722E1038F400B126D8 = {
 			isa = PBXGroup;
 			children = (
+				5594B5012E11BCC9001C9B40 /* ForgotWidgetExtension.entitlements */,
 				55FF6D7D2E1038F400B126D8 /* Forgot */,
 				55FF6D8D2E1038F500B126D8 /* ForgotTests */,
 				55FF6D972E1038F500B126D8 /* ForgotUITests */,
+				55FF6DB72E105BD400B126D8 /* ForgotWidget */,
+				55FF6DB22E105BD400B126D8 /* Frameworks */,
 				55FF6D7C2E1038F400B126D8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +159,18 @@
 				55FF6D7B2E1038F400B126D8 /* Forgot.app */,
 				55FF6D8A2E1038F500B126D8 /* ForgotTests.xctest */,
 				55FF6D942E1038F500B126D8 /* ForgotUITests.xctest */,
+				55FF6DB12E105BD400B126D8 /* ForgotWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		55FF6DB22E105BD400B126D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55FF6DB32E105BD400B126D8 /* WidgetKit.framework */,
+				55FF6DB52E105BD400B126D8 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,10 +183,12 @@
 				55FF6D772E1038F400B126D8 /* Sources */,
 				55FF6D782E1038F400B126D8 /* Frameworks */,
 				55FF6D792E1038F400B126D8 /* Resources */,
+				55FF6DCC2E105BD500B126D8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				55FF6DC62E105BD500B126D8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				55FF6D7D2E1038F400B126D8 /* Forgot */,
@@ -163,6 +246,28 @@
 			productReference = 55FF6D942E1038F500B126D8 /* ForgotUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		55FF6DB02E105BD400B126D8 /* ForgotWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55FF6DC92E105BD500B126D8 /* Build configuration list for PBXNativeTarget "ForgotWidgetExtension" */;
+			buildPhases = (
+				55FF6DAD2E105BD400B126D8 /* Sources */,
+				55FF6DAE2E105BD400B126D8 /* Frameworks */,
+				55FF6DAF2E105BD400B126D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				55FF6DB72E105BD400B126D8 /* ForgotWidget */,
+			);
+			name = ForgotWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = ForgotWidgetExtension;
+			productReference = 55FF6DB12E105BD400B126D8 /* ForgotWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +289,9 @@
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = 55FF6D7A2E1038F400B126D8;
 					};
+					55FF6DB02E105BD400B126D8 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 				};
 			};
 			buildConfigurationList = 55FF6D762E1038F400B126D8 /* Build configuration list for PBXProject "Forgot" */;
@@ -203,6 +311,7 @@
 				55FF6D7A2E1038F400B126D8 /* Forgot */,
 				55FF6D892E1038F500B126D8 /* ForgotTests */,
 				55FF6D932E1038F500B126D8 /* ForgotUITests */,
+				55FF6DB02E105BD400B126D8 /* ForgotWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +332,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		55FF6D922E1038F500B126D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55FF6DAF2E105BD400B126D8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +369,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		55FF6DAD2E105BD400B126D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +388,11 @@
 			isa = PBXTargetDependency;
 			target = 55FF6D7A2E1038F400B126D8 /* Forgot */;
 			targetProxy = 55FF6D952E1038F500B126D8 /* PBXContainerItemProxy */;
+		};
+		55FF6DC62E105BD500B126D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 55FF6DB02E105BD400B126D8 /* ForgotWidgetExtension */;
+			targetProxy = 55FF6DC52E105BD500B126D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -395,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Forgot/Forgot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WY3D9T367;
@@ -423,6 +552,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Forgot/Forgot.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WY3D9T367;
@@ -518,6 +648,62 @@
 			};
 			name = Release;
 		};
+		55FF6DCA2E105BD500B126D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ForgotWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7WY3D9T367;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ForgotWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ForgotWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vepercodes.Forgot.ForgotWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		55FF6DCB2E105BD500B126D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ForgotWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7WY3D9T367;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ForgotWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ForgotWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vepercodes.Forgot.ForgotWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,6 +739,15 @@
 			buildConfigurations = (
 				55FF6DA52E1038F500B126D8 /* Debug */,
 				55FF6DA62E1038F500B126D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55FF6DC92E105BD500B126D8 /* Build configuration list for PBXNativeTarget "ForgotWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55FF6DCA2E105BD500B126D8 /* Debug */,
+				55FF6DCB2E105BD500B126D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
