@@ -7,22 +7,12 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-
+    
     var body: some View {
-        
-        TabView {
-            ForgotList().tabItem{
-                Image(systemName: "list.bullet")
-                Text("Forgot List")
-            }
-            Setting().tabItem{
-                Image(systemName: "gear")
-                Text("Setting")
-            }
-        }
+            Home()
     }
 }
 

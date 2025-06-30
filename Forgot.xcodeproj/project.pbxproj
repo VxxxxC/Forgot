@@ -71,7 +71,7 @@
 		55FF6DD22E106A8800B126D8 /* Exceptions for "Forgot" folder in "ForgotWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				ForgotModel.swift,
+				Model/ForgotModel.swift,
 			);
 			target = 55FF6DB02E105BD400B126D8 /* ForgotWidgetExtension */;
 		};
