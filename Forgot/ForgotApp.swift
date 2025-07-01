@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct ForgotApp: App {
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             ForgotItems.self,

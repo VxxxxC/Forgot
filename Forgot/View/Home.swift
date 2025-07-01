@@ -12,8 +12,6 @@ import WidgetKit
 struct Home: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: [SortDescriptor(\ForgotItems.timestamp, order: .reverse)], animation: .snappy) private var items: [ForgotItems]
-    @State private var showingPopup: Bool = false
-    @State private var inputText: String = ""
 
     var body: some View {
             VStack{
@@ -32,7 +30,9 @@ struct Home: View {
                     }
                     
                 } footer: {
-                    Button(action: { addItem() }, label:{
+                    Button(action: {
+                        addItem()
+                    }, label:{
                         Image(systemName: "plus.circle.fill").fontWeight(.regular).font(.system(size: 50)).foregroundStyle(.cyan)
                     })
                 }
@@ -65,19 +65,11 @@ struct Home: View {
          
         }.hLeading()
     }
-    
-    private func submit() {
-        guard !inputText.isEmpty else { return }
-        addItem()
-        showingPopup.toggle()
-        inputText = ""
-    }
 
     private func addItem() {
         withAnimation {
-            let newItem = ForgotItems(timestamp: Date(), task: inputText)
+            let newItem = ForgotItems(timestamp: Date(), task: "")
             modelContext.insert(newItem)
-            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     

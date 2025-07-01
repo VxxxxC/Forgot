@@ -12,32 +12,13 @@ import WidgetKit
 struct ForgotItemRow: View {
     
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
     @Query(sort: [SortDescriptor(\ForgotItems.timestamp, order: .reverse)], animation: .snappy) private var items: [ForgotItems]
     
     @Bindable var forgot : ForgotItems
     @FocusState private var isActive: Bool
     
     var body: some View {
-        
-        //        NavigationView{
-        //                List {
-        //                    Section(activeSectionTitle){
-        //                        ForEach(items) { item in
-        //                            HStack(){
-        //                                Text(item.task)
-        //                                Spacer()
-        //                                Text("\(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .shortened))").foregroundColor(.secondary).font(.subheadline)
-        //                            }
-        //                        }
-        //                        .onDelete(perform: deleteItems)
-        //                    }
-        //
-        //                }.toolbar{
-        //                        if !items.isEmpty {
-        //                         EditButton()
-        //                        }
-        //                }.backgroundStyle(.cyan)
-        //            }
         
         HStack{
             if !isActive && !forgot.task.isEmpty {
@@ -83,23 +64,21 @@ struct ForgotItemRow: View {
             }.tint(.red)
         }
         .onSubmit(of: .text){
-            modelContext.delete(forgot)
+            if forgot.task.isEmpty {
+                 modelContext.delete(forgot)
+            } else {
+                modelContext.insert(forgot)
+            }
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        .onChange(of: scenePhase){
+            oldValue, newValue in
+            if newValue != .active && forgot.task.isEmpty {
+                modelContext.delete(forgot)
+            }
         }
     }
-//    
-//    var activeSectionTitle: String {
-//        let count = items.count
-//        return count == 0 ? "No Items" : "\(count) Item\(count == 1 ? "" : "s")"
-//    }
-//    
-//    private func deleteItems(offsets: IndexSet) {
-//        withAnimation {
-//            for index in offsets {
-//                modelContext.delete(items[index])
-//                WidgetCenter.shared.reloadAllTimelines()
-//            }
-//        }
-//    }
+
     
 }
 

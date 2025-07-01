@@ -12,13 +12,15 @@ import SwiftData
 @Model
 final class ForgotItems {
     var timestamp: Date
-    var task: String = ""
-    var isCompleted: Bool = false
-    var priority: Priority = Priority.low
+    var task: String
+    var isCompleted: Bool
+    var priority: Priority
     
     init(timestamp: Date, task: String) {
         self.timestamp = timestamp
         self.task = task
+        self.isCompleted = false
+        self.priority = Priority.low
     }
 }
 
