@@ -13,7 +13,7 @@ struct ForgotItemRow: View {
     
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
-    @Query(sort: [SortDescriptor(\ForgotItems.timestamp, order: .reverse)], animation: .snappy) private var items: [ForgotItems]
+    @Query(sort: [SortDescriptor(\ForgotItems.timestamp, order: .forward)], animation: .snappy) private var items: [ForgotItems]
     
     @Bindable var forgot : ForgotItems
     @FocusState private var isActive: Bool
@@ -31,11 +31,18 @@ struct ForgotItemRow: View {
                         .contentTransition(.symbolEffect(.replace))
                 })
             }
-            TextField("You Forgot...", text: $forgot.task)
-                .strikethrough(forgot.isCompleted) // if Complete will strikethrough the item name
-                .foregroundStyle(forgot.isCompleted ? .secondary : .primary)
-                .focused($isActive)
-            
+            VStack(alignment: .leading){
+                TextField("You Forgot...", text: $forgot.task)
+                    .strikethrough(forgot.isCompleted) // if Complete will strikethrough the item name
+                    .foregroundStyle(forgot.isCompleted ? .secondary : .primary)
+                    .focused($isActive)
+                
+                if !forgot.task.isEmpty {
+                    Text(forgot.timestamp.formatted(.dateTime.day().month().weekday()))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
             if !isActive && !forgot.task.isEmpty{
                 // Priority Button
                 Menu {

@@ -14,7 +14,7 @@ struct ForgotItemFinishRow: View {
     
     init(showAll: Binding<Bool>){
         let predicate = #Predicate<ForgotItems>{ $0.isCompleted }
-        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .reverse)]
+        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .forward)]
         
         var descriptor = FetchDescriptor(predicate: predicate, sortBy: sort)
         // Limiting to 15

@@ -16,7 +16,7 @@ struct Home: View {
     
     init(){
         let predicate = #Predicate<ForgotItems>{ !$0.isCompleted }
-        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .reverse)]
+        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .forward)]
         let descriptor = FetchDescriptor(predicate: predicate, sortBy: sort)
         
         _items = Query(descriptor, animation: .snappy)
@@ -39,7 +39,7 @@ struct Home: View {
                     // Nested Container
                     List{
                         ForgotItemFinishRow(showAll: $showAll)
-                    }.cornerRadius(20).padding(10)
+                    }.cornerRadius(20).padding(10).opacity(0.8)
                     
                     
                     
