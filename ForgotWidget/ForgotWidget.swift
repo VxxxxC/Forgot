@@ -58,14 +58,17 @@ struct ForgotEntry: TimelineEntry {
 
 struct ForgotWidgetEntryView : View {
     var entry: Provider.Entry
+    
+    @Environment(\.widgetFamily) var family
 
     @Query(itemDescriptor, animation: .snappy) private var forgotList: [ForgotItems]
     var body: some View {
+            HomeScreenWidget()
+    }
+    
+    @ViewBuilder
+    func HomeScreenWidget() -> some View {
         VStack {
-//            HStack{
-//                Text("\(Date().formatted(.dateTime.day().month().weekday()))")
-//            }
-            
                 ForEach(forgotList) {
                     item in
                     HStack(spacing: 10){
@@ -91,6 +94,7 @@ struct ForgotWidgetEntryView : View {
             }
         }
     }
+
     
     static var itemDescriptor: FetchDescriptor<ForgotItems> {
         let predicate = #Predicate<ForgotItems>{ !$0.isCompleted }
@@ -110,7 +114,9 @@ struct ForgotWidget: Widget {
                 .containerBackground(.fill.tertiary, for: .widget)
                 .modelContainer(sharedModelContainer)
         }
-        .supportedFamilies( [.systemMedium] ) // specify widget size , if no specify will support all size
+        .supportedFamilies( [.systemMedium] )
+        // specify widget size , if no specify will support all size
+        // .system is widget in the home screen , .accessory is widget at the lock screen
     }
 }
 
