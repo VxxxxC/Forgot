@@ -79,7 +79,13 @@ struct ForgotWidgetEntryView : View {
                         .tint(item.priority.color.gradient)
                         .buttonBorderShape(.circle)
                         
-                        Text(item.task).font(.callout)
+                        VStack(alignment: .leading) {
+                            Text(item.task).font(.callout)
+                            Text(item.timestamp.formatted(.dateTime.day().month().weekday()))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        
                         
                         Spacer()
                     }
@@ -98,7 +104,7 @@ struct ForgotWidgetEntryView : View {
     
     static var itemDescriptor: FetchDescriptor<ForgotItems> {
         let predicate = #Predicate<ForgotItems>{ !$0.isCompleted }
-        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .reverse)]
+        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .forward)]
         var descriptor = FetchDescriptor(predicate: predicate, sortBy: sort)
         descriptor.fetchLimit = 3
         return descriptor
