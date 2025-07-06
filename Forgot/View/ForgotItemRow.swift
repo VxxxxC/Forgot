@@ -24,6 +24,7 @@ struct ForgotItemRow: View {
             if !isActive && !forgot.task.isEmpty {
                 Button(action: {
                     forgot.isCompleted.toggle()
+                    WidgetCenter.shared.reloadAllTimelines()
                 }, label: {
                     Image(systemName: forgot.isCompleted ? "checkmark.circle.fill" : "circle").font(.title2).padding(3).contentShape(.rect)
                         .foregroundStyle(forgot.isCompleted ? .secondary : .primary)
@@ -63,6 +64,7 @@ struct ForgotItemRow: View {
         .swipeActions(edge: .trailing) {
             Button("", systemImage: "trash"){
                 modelContext.delete(forgot)
+                WidgetCenter.shared.reloadAllTimelines()
             }.tint(.red)
         }
         .onSubmit(of: .text){
@@ -77,7 +79,11 @@ struct ForgotItemRow: View {
             oldValue, newValue in
             if newValue != .active && forgot.task.isEmpty {
                 modelContext.delete(forgot)
+                WidgetCenter.shared.reloadAllTimelines()
             }
+        }
+        .task {
+            forgot.isCompleted = forgot.isCompleted
         }
     }
 
