@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 import SwiftData
+import AppIntents
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> ForgotEntry {
@@ -61,23 +62,40 @@ struct ForgotWidgetEntryView : View {
     @Query(itemDescriptor, animation: .snappy) private var forgotList: [ForgotItems]
     var body: some View {
         VStack {
-            HStack{
-                Text("\(Date().formatted(.dateTime.day().month().weekday()))")
-            }
+//            HStack{
+//                Text("\(Date().formatted(.dateTime.day().month().weekday()))")
+//            }
             
                 ForEach(forgotList) {
                     item in
-                    HStack{
-                        Text("\(item.task)")
+                    HStack(spacing: 10){
+                        Button(intent: ToggleButton(id: item.id)) {
+                            Image(systemName: "circle")
+                        }
+                        .font(.callout)
+                        .tint(item.priority.color.gradient)
+                        .buttonBorderShape(.circle)
+                        
+                        Text(item.task).font(.callout)
+                        
+                        Spacer()
                     }
+                    .transition(.push(from: .bottom))
                 }
             
-        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .overlay {
+            if forgotList.isEmpty {
+                Text("Nothing You Forgot 🎉").font(.callout).transition(.push(from: .bottom))
+            }
+        }
     }
     
     static var itemDescriptor: FetchDescriptor<ForgotItems> {
+        let predicate = #Predicate<ForgotItems>{ !$0.isCompleted }
         let sort = [SortDescriptor(\ForgotItems.timestamp, order: .reverse)]
-        var descriptor = FetchDescriptor(sortBy: sort)
+        var descriptor = FetchDescriptor(predicate: predicate, sortBy: sort)
         descriptor.fetchLimit = 3
         return descriptor
     }
@@ -92,6 +110,7 @@ struct ForgotWidget: Widget {
                 .containerBackground(.fill.tertiary, for: .widget)
                 .modelContainer(sharedModelContainer)
         }
+        .supportedFamilies( [.systemMedium] ) // specify widget size , if no specify will support all size
     }
 }
 
@@ -123,3 +142,31 @@ extension ConfigurationAppIntent {
     ForgotEntry()
 }
 
+struct ToggleButton: AppIntent {
+    init(){}
+    
+    static var title: LocalizedStringResource = .init(stringLiteral: "Toggle Forgot State")
+    
+    @Parameter(title: "Forgot ID")
+    var id: String
+ 
+    init(id: String) {
+        self.id = id
+    }
+    
+    func perform() async throws -> some IntentResult {
+        // Update Forgot Item Status
+        let context = try ModelContext(.init(for: ForgotItems.self))
+        
+        // Retreiving Respective Forgot Item
+        let descriptor = FetchDescriptor(predicate: #Predicate<ForgotItems> { $0.id == id })
+        if let item = try context.fetch(descriptor).first {
+            item.isCompleted = true
+            
+            // Saving the context
+            try context.save()
+        }
+        
+        return .result()
+    }
+}

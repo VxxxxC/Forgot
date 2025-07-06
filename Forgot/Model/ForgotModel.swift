@@ -11,12 +11,14 @@ import SwiftData
 
 @Model
 final class ForgotItems {
+    var id: String
     var timestamp: Date
     var task: String
     var isCompleted: Bool
     var priority: Priority
     
     init(timestamp: Date, task: String) {
+        self.id = UUID().uuidString
         self.timestamp = timestamp
         self.task = task
         self.isCompleted = false
