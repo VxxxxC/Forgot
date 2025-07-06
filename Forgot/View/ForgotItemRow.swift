@@ -22,14 +22,16 @@ struct ForgotItemRow: View {
         
         HStack{
             if !isActive && !forgot.task.isEmpty {
-                Button(action: {}, label: {
+                Button(action: {
+                    forgot.isCompleted.toggle()
+                }, label: {
                     Image(systemName: forgot.isCompleted ? "checkmark.circle.fill" : "circle").font(.title2).padding(3).contentShape(.rect)
                         .foregroundStyle(forgot.isCompleted ? .secondary : .primary)
                         .contentTransition(.symbolEffect(.replace))
                 })
             }
             TextField("You Forgot...", text: $forgot.task)
-                .strikethrough(forgot.isCompleted)
+                .strikethrough(forgot.isCompleted) // if Complete will strikethrough the item name
                 .foregroundStyle(forgot.isCompleted ? .secondary : .primary)
                 .focused($isActive)
             

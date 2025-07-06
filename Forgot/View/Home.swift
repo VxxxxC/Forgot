@@ -11,7 +11,18 @@ import WidgetKit
 
 struct Home: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: [SortDescriptor(\ForgotItems.timestamp, order: .reverse)], animation: .snappy) private var items: [ForgotItems]
+    @Query private var items: [ForgotItems]
+    @State private var showAll: Bool = false
+    
+    init(){
+        let predicate = #Predicate<ForgotItems>{ !$0.isCompleted }
+        let sort = [SortDescriptor(\ForgotItems.timestamp, order: .reverse)]
+        let descriptor = FetchDescriptor(predicate: predicate, sortBy: sort)
+        
+        _items = Query(descriptor, animation: .snappy)
+    }
+    
+  
 
     var body: some View {
             VStack{
@@ -22,8 +33,16 @@ struct Home: View {
                                 ForgotItemRow(forgot: $0)
                             }
                         }
-                    }
-                        
+                    }.cornerRadius(20).padding(10)
+                    
+                    
+                    // Nested Container
+                    List{
+                        ForgotItemFinishRow(showAll: $showAll)
+                    }.cornerRadius(20).padding(10)
+                    
+                    
+                    
                 } header: {
                     HStack{
                         HeaderView()
@@ -36,6 +55,7 @@ struct Home: View {
                         Image(systemName: "plus.circle.fill").fontWeight(.regular).font(.system(size: 50)).foregroundStyle(.cyan)
                     })
                 }
+
                 
             }
     
@@ -94,7 +114,7 @@ struct Home: View {
 // adding customize UI for 'View' struct
 extension View {
     func hLeading() -> some View {
-        self.frame(maxWidth: .infinity, alignment: .leading)
+        self.frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
     }
 }
 
