@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		556C46D32E1C18AF00D2652F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556C46D22E1C18AF00D2652F /* Assets.xcassets */; };
+		556C46D42E1C18AF00D2652F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556C46D22E1C18AF00D2652F /* Assets.xcassets */; };
+		556C46D52E1C18AF00D2652F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556C46D22E1C18AF00D2652F /* Assets.xcassets */; };
+		556C46D62E1C18AF00D2652F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 556C46D22E1C18AF00D2652F /* Assets.xcassets */; };
 		55FF6DB42E105BD400B126D8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF6DB32E105BD400B126D8 /* WidgetKit.framework */; };
 		55FF6DB62E105BD400B126D8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55FF6DB52E105BD400B126D8 /* SwiftUI.framework */; };
 		55FF6DC72E105BD500B126D8 /* ForgotWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 55FF6DB12E105BD400B126D8 /* ForgotWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -51,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		556C46D22E1C18AF00D2652F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5594B5012E11BCC9001C9B40 /* ForgotWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ForgotWidgetExtension.entitlements; sourceTree = "<group>"; };
 		55FF6D7B2E1038F400B126D8 /* Forgot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forgot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55FF6D8A2E1038F500B126D8 /* ForgotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForgotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +66,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		556C46C72E1BEC6B00D2652F /* Exceptions for "Forgot" folder in "Forgot" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 55FF6D7A2E1038F400B126D8 /* Forgot */;
+		};
 		55FF6DC82E105BD500B126D8 /* Exceptions for "ForgotWidget" folder in "ForgotWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -81,6 +93,7 @@
 		55FF6D7D2E1038F400B126D8 /* Forgot */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				556C46C72E1BEC6B00D2652F /* Exceptions for "Forgot" folder in "Forgot" target */,
 				55FF6DD22E106A8800B126D8 /* Exceptions for "Forgot" folder in "ForgotWidgetExtension" target */,
 			);
 			path = Forgot;
@@ -150,6 +163,7 @@
 				55FF6DB72E105BD400B126D8 /* ForgotWidget */,
 				55FF6DB22E105BD400B126D8 /* Frameworks */,
 				55FF6D7C2E1038F400B126D8 /* Products */,
+				556C46D22E1C18AF00D2652F /* Assets.xcassets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -321,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				556C46D42E1C18AF00D2652F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				556C46D32E1C18AF00D2652F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				556C46D52E1C18AF00D2652F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				556C46D62E1C18AF00D2652F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,9 +547,9 @@
 				DEVELOPMENT_TEAM = 7WY3D9T367;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Forgot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -558,9 +576,9 @@
 				DEVELOPMENT_TEAM = 7WY3D9T367;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Forgot/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

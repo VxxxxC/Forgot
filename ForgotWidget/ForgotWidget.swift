@@ -14,7 +14,7 @@ struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> ForgotEntry {
         ForgotEntry()
     }
-
+    
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> ForgotEntry {
         ForgotEntry()
     }
@@ -23,27 +23,16 @@ struct Provider: AppIntentTimelineProvider {
         var entries: [ForgotEntry] = []
         let entry = ForgotEntry()
         entries.append(entry)
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-//        let currentDate = Date()
-//        for hourOffset in 0 ..< 5 {
-//            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-//            let entry = ForgotEntry(date: entryDate, configuration: configuration)
-//            entries.append(entry)
-//        }
-
+        
         return Timeline(entries: entries, policy: .atEnd)
     }
-
-//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             ForgotItems.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, allowsSave: true)
-
+        
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
@@ -60,15 +49,21 @@ struct ForgotWidgetEntryView : View {
     var entry: Provider.Entry
     
     @Environment(\.widgetFamily) var family
-
+    
     @Query(itemDescriptor, animation: .snappy) private var forgotList: [ForgotItems]
     var body: some View {
-            HomeScreenWidget()
+        HomeScreenWidget()
     }
     
     @ViewBuilder
     func HomeScreenWidget() -> some View {
         VStack {
+            Section
+            {
+                if !forgotList.isEmpty{
+                    Text("Things You Forgot..").font(.caption).foregroundStyle(.red)
+                }
+                
                 ForEach(forgotList) {
                     item in
                     HStack(spacing: 10){
@@ -85,13 +80,10 @@ struct ForgotWidgetEntryView : View {
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
-                        
-                        
-                        Spacer()
                     }
                     .transition(.push(from: .bottom))
                 }
-            
+            }.hLeading()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .overlay {
@@ -100,7 +92,7 @@ struct ForgotWidgetEntryView : View {
             }
         }
     }
-
+    
     
     static var itemDescriptor: FetchDescriptor<ForgotItems> {
         let predicate = #Predicate<ForgotItems>{ !$0.isCompleted }
@@ -113,7 +105,7 @@ struct ForgotWidgetEntryView : View {
 
 struct ForgotWidget: Widget {
     let kind: String = "ForgotWidget"
-
+    
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: kind, provider: Provider()) { entry in
             ForgotWidgetEntryView(entry: entry)
@@ -131,7 +123,7 @@ var sharedModelContainer: ModelContainer = {
         ForgotItems.self,
     ])
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, allowsSave: true)
-
+    
     do {
         return try ModelContainer(for: schema, configurations: [modelConfiguration])
     } catch {
@@ -148,12 +140,6 @@ extension ConfigurationAppIntent {
 }
 
 
-#Preview(as: .systemSmall) {
-    ForgotWidget()
-} timeline: {
-    ForgotEntry()
-}
-
 struct ToggleButton: AppIntent {
     init(){}
     
@@ -161,7 +147,7 @@ struct ToggleButton: AppIntent {
     
     @Parameter(title: "Forgot ID")
     var id: String
- 
+    
     init(id: String) {
         self.id = id
     }
@@ -181,4 +167,18 @@ struct ToggleButton: AppIntent {
         
         return .result()
     }
+}
+
+// adding customize UI for 'View' struct
+extension View {
+    func hLeading() -> some View {
+        self.frame(maxWidth: .infinity, alignment: .leading).padding(.leading)
+    }
+}
+
+
+#Preview(as: .systemSmall) {
+    ForgotWidget()
+} timeline: {
+    ForgotEntry()
 }
